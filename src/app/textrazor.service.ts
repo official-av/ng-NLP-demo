@@ -22,12 +22,18 @@ export class TextrazorService {
         let res: any = response;
         console.log('oy');
         let entities = res.response.entities;
+        console.log(entities);
         let places = [];
+        let links = [];
         for (let entity of entities) {
           if (entity.type && entity.type.indexOf("Place") != -1)
             places.push(entity.matchedText);
+          let obj = {name: entity.matchedText, link: entity.wikiLink};
+          links.push(obj);
         }
-        resolve(places);
+        console.log(links);
+        let obj2 = {places: places, links: links};
+        resolve(obj2);
       }, (error: any) => {
         reject('error! try again by adding some text');
       });

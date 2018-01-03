@@ -13,15 +13,29 @@
       <br>
       <hr>
       <div class="row">
-        <div class="col-6">
+        <div class="col-3">
           <h5>Extracted Places</h5>
           <ng-container *ngIf="places.length!==0;else emptyPlaces">
             <ng-container *ngFor="let place of places">
-              <button class="btn btn-primary" type="button" (click)="showPlace(place)">{{place}}</button>
+              <button class="btn btn-primary" type="button" (click)="showPlace(place)">
+                {{place}}
+              </button>
             </ng-container>
           </ng-container>
           <ng-template #emptyPlaces>
             <h6>add some text and call api to see extracted places</h6>
+          </ng-template>
+
+        </div>
+        <div class="col-3">
+          <h5>Extracted wikipedia links</h5>
+          <ng-container *ngIf="links.length!==0;else noLinks">
+            <ng-container *ngFor="let link of links">
+              <a [href]="link.link">{{link.name}}</a><br>
+            </ng-container>
+          </ng-container>
+          <ng-template #noLinks>
+            <h6>add some text and call api</h6>
           </ng-template>
 
         </div>

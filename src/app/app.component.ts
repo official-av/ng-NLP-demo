@@ -12,6 +12,7 @@ import {NgProgress} from "ngx-progressbar";
 export class AppComponent {
   text: string = '';
   places = [];
+  links = [];
   lat: number;
   long: number;
   showMap = false;
@@ -22,8 +23,9 @@ export class AppComponent {
   onSubmit(form: NgForm) {
     this.ngProgress.start();
     console.log(form.value);
-    this.textrazorService.sendText(this.text).then((places: string[]) => {
-      this.places = places;
+    this.textrazorService.sendText(this.text).then((obj: any) => {
+      this.places = obj.places;
+      this.links = obj.links;
     }).then(() => {
       this.ngProgress.done();
     }).catch((err: any) => {
