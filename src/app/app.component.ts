@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {NgForm} from "@angular/forms";
 import {TextrazorService} from "./textrazor.service";
 import {GeocodingService} from "./geocoding.service";
+import {NgProgress} from "ngx-progressbar";
 
 @Component({
   selector: 'app-root',
@@ -15,13 +16,20 @@ export class AppComponent {
   long: number;
   showMap = false;
 
-  constructor(private textrazorService: TextrazorService, private geoService: GeocodingService) {
+  constructor(private textrazorService: TextrazorService, private geoService: GeocodingService, public ngProgress: NgProgress) {
   }
 
   onSubmit(form: NgForm) {
+    this.ngProgress.start();
     console.log(form.value);
     this.textrazorService.sendText(this.text).then((places: string[]) => {
       this.places = places;
+    }).then(() => {
+      this.ngProgress.done();
+    }).catch((err: any) => {
+      if (err)
+        console.log(err);
+      this.ngProgress.done();
     });
   }
 

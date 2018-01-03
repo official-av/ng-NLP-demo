@@ -8,6 +8,7 @@ import {HttpClientModule} from "@angular/common/http";
 import {TextrazorService} from "./textrazor.service";
 import {GeocodingService} from "./geocoding.service";
 import {AgmCoreModule} from "@agm/core";
+import {NgProgressModule} from "ngx-progressbar";
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import {AgmCoreModule} from "@agm/core";
     BrowserModule,
     FormsModule,
     HttpClientModule,
+    NgProgressModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyBbiQ0I4vJ1NYcXm2a26H7rXp92G0SOxHE'
     })

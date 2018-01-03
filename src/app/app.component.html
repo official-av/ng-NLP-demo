@@ -1,3 +1,4 @@
+<ng-progress [color]="'blue'"></ng-progress>
 <div class="container-fluid">
   <h3>RAM_AI Test App</h3>
   <div class="card">
@@ -11,17 +12,28 @@
       </form>
       <br>
       <hr>
-      <div class="row" *ngIf="places.length!==0">
+      <div class="row">
         <div class="col-6">
           <h5>Extracted Places</h5>
-          <ng-container *ngFor="let place of places">
-            <button class="btn btn-primary" type="button" (click)="showPlace(place)">{{place}}</button>
+          <ng-container *ngIf="places.length!==0;else emptyPlaces">
+            <ng-container *ngFor="let place of places">
+              <button class="btn btn-primary" type="button" (click)="showPlace(place)">{{place}}</button>
+            </ng-container>
           </ng-container>
+          <ng-template #emptyPlaces>
+            <h6>add some text and call api to see extracted places</h6>
+          </ng-template>
+
         </div>
         <div class="col-6">
-          <agm-map [latitude]="lat" [longitude]="long">
+          <agm-map *ngIf="showMap;else noPlaces" [latitude]="lat" [longitude]="long">
             <agm-marker [latitude]="lat" [longitude]="long"></agm-marker>
           </agm-map>
+          <ng-template #noPlaces>
+            <div class="empty">
+              <h6>click on a place to see the location on map</h6>
+            </div>
+          </ng-template>
         </div>
       </div>
     </div>
